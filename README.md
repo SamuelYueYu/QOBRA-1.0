@@ -24,16 +24,12 @@ A detailed introduction to the project.
 
 ## Features
 ### Core Features
-- Feature 1
-- Feature 2
-
-### Optional Features
-- Optional Feature 1
-- Optional Feature 2
+- Qiskit
+- PyTorch
 
 ## Installation
 ### Prerequisites
-- List of prerequisites, like Node.js, Python, etc.
+- Python 
 
 ### Steps to Install
 ```bash
