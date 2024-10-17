@@ -9,14 +9,11 @@ Quantum variational autoencoder for generating protein sequences that bind to sp
     1. [Prerequisites](#prerequisites)
     2. [Steps to Install](#steps-to-install)
 3. [Usage](#usage)
-    1. [Basic Usage](#basic-usage)
-    2. [Advanced Usage](#advanced-usage)
 4. [Configuration](#configuration)
     1. [Configuration File](#configuration-file)
     2. [Environment Variables](#environment-variables)
-5. [Contributing](#contributing)
+5. [Contact](#contact)
 6. [License](#license)
-7. [Contact](#contact)
 
 ## Features
 ### Core Features
@@ -41,3 +38,10 @@ npm install
 python train.py 6 1 0
 python generate.py 6 1 1
 ```
+
+## Contact
+For questions, comments, or support, please contact:
+
+Yue Yu (samuel.yu@yale.edu)
+
+Francesco Calcagno (francesco.calcagno@unibo.it)
