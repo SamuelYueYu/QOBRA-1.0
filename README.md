@@ -2,34 +2,30 @@
 Quantum variational autoencoder for generating protein sequences that bind to specific metal ions
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Features](#features)
+1. [Features](#features)
     1. [Core Features](#core-features)
     2. [Optional Features](#optional-features)
-3. [Installation](#installation)
+2. [Installation](#installation)
     1. [Prerequisites](#prerequisites)
     2. [Steps to Install](#steps-to-install)
-4. [Usage](#usage)
+3. [Usage](#usage)
     1. [Basic Usage](#basic-usage)
     2. [Advanced Usage](#advanced-usage)
-5. [Configuration](#configuration)
+4. [Configuration](#configuration)
     1. [Configuration File](#configuration-file)
     2. [Environment Variables](#environment-variables)
-6. [Contributing](#contributing)
-7. [License](#license)
-8. [Contact](#contact)
-
-## Introduction
-A detailed introduction to the project.
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Contact](#contact)
 
 ## Features
 ### Core Features
-- Qiskit
-- PyTorch
+- Qiskit 1.2.0
+- PyTorch 2.2.0 + cu121 package
 
 ## Installation
 ### Prerequisites
-- Python 
+- Python 3.11.5
 
 ### Steps to Install
 ```bash
@@ -37,3 +33,11 @@ A detailed introduction to the project.
 git clone https://github.com/your-repo/project.git
 cd project
 npm install
+```
+
+## Usage
+```
+# Procedure to train & use network to generate new sequences
+python train.py 6 1 0
+python generate.py 6 1 1
+```
