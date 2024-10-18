@@ -3,8 +3,6 @@ Quantum variational autoencoder for generating protein sequences that bind to sp
 
 ## Table of Contents
 1. [Features](#features)
-    1. [Core Features](#core-features)
-    2. [Optional Features](#optional-features)
 2. [Installation](#installation)
     1. [Prerequisites](#prerequisites)
     2. [Steps to Install](#steps-to-install)
@@ -16,7 +14,6 @@ Quantum variational autoencoder for generating protein sequences that bind to sp
 6. [License](#license)
 
 ## Features
-### Core Features
 - Qiskit 1.2.0
 - PyTorch 2.2.0 + cu121 package
 
