@@ -1,0 +1,24 @@
+name: cQED4ChemDyn_env
+channels:
+  - anaconda
+  - defaults
+  - conda-forge
+dependencies:
+  - ipython=8.12.0=pyh41d4057_0
+  - json5=0.9.25=pyhd8ed1ab_0
+  - jsonpointer=3.0.0=py39hf3d152e_0
+  - jsonschema=4.23.0=pyhd8ed1ab_0
+  - jsonschema-specifications=2023.12.1=pyhd8ed1ab_0
+  - jsonschema-with-format-nongpl=4.23.0=hd8ed1ab_0
+  - matplotlib=3.9.2=py39hf3d152e_0
+  - matplotlib-base=3.9.2=py39h0565ad7_0
+  - matplotlib-inline=0.1.7=pyhd8ed1ab_0
+  - notebook=7.2.1=pyhd8ed1ab_0
+  - notebook-shim=0.2.4=pyhd8ed1ab_0
+  - numpy=1.24.3=py39h14f4228_0
+  - numpy-base=1.24.3=py39h31eccc5_0
+  - python=3.9.18=h0755675_0_cpython
+  - python-dateutil=2.9.0post0=py39h06a4308_2
+  - python-fastjsonschema=2.20.0=pyhd8ed1ab_0
+  - python-json-logger=2.0.7=pyhd8ed1ab_0
+  - python_abi=3.9=5_cp39
