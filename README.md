@@ -27,7 +27,7 @@ Quantum variational autoencoder for generating protein sequences that bind to sp
 ### Steps to Install
 ```bash
 # Example installation steps
-git clone https://github.com/your-repo/project.git
+git clone https://github.com/SamuelYueYu/Metalloprotein.git
 cd project
 npm install
 ```
