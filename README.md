@@ -1,5 +1,5 @@
 # Metalloprotein
-Quantum variational autoencoder for generating protein sequences that bind to specific metal ions
+Quantum pseudo kernel-elastic autoencoder for generating protein sequences that bind to specific metal ions
 
 ## Table of Contents
 1. [Features](#features)
