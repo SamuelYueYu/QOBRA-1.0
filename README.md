@@ -14,7 +14,16 @@ Quantum pseudo kernel-elastic autoencoder for generating protein sequences that 
 6. [License](#license)
 
 ## Features
-- Qiskit 1.2.0
+- biopython==1.85
+- cupy-cuda12x==12.3.0
+- mpi4py==3.1.5
+- numpy==1.26.4
+- qiskit==1.4.2
+- qiskit-algorithms==0.3.1
+- qiskit-ibm-runtime==0.37.0
+- qiskit-machine-learning==0.8.2
+- rdkit==2024.9.6
+- scipy==1.15.2
 - PyTorch 2.2.0 + cu121 package
 
 ## Installation
