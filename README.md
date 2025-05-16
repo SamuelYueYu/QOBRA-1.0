@@ -1,5 +1,6 @@
 # Metalloprotein
 Quantum pseudo kernel-elastic autoencoder for generating protein sequences that bind to specific metal ions
+[Open in Colab](https://colab.research.google.com/github/SamuelYueYu/Metalloprotein/blob/main/src/QPKAE_demo.ipynb)
 
 ## Table of Contents
 1. [Features](#features)
