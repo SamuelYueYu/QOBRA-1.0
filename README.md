@@ -1,7 +1,7 @@
 # Metalloprotein
 Quantum Operator-Based Real Ansatz (QOBRA) for generating protein sequences that bind to specific metal ions
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/Metalloprotein/blob/main/src/QOBRA_demo.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/Metalloprotein/main/src/QOBRA_demo.ipynb)
 
 ## Table of Contents
 1. [Features](#features)
