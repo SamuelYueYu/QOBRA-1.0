@@ -314,11 +314,11 @@ Results are organized by sequence type and parameters:
 If you use QOBRA in your research, please cite:
 
 ```bibtex
-@article{yu2024qobra,
-  title={QOBRA: Quantum Operator-Based Real-Amplitude autoencoder for Molecular Design},
-  author={Yu, Yue and Calcagno, Francesco},
+@article{yu2025qobra,
+  title={QOBRA: A Quantum Operator-Based Autoencoder for De Novo Molecular Design},
+  author={Yu, Yue and Calcagno, Francesco and Li, Haote and Batista, Victor},
   journal={arXiv preprint},
-  year={2024}
+  year={2025}
 }
 ```
 
@@ -326,11 +326,11 @@ If you use QOBRA in your research, please cite:
 
 For questions, comments, or support, please contact:
 
-**Yue Yu** (samuel.yu@yale.edu)  
+**Yue Yu** (samuel.yu@yale.edu)
 Yale University
 
-**Francesco Calcagno** (francesco.calcagno@unibo.it)  
-University of Bologna
+**Victor S. Batista** (victor.batista@yale.edu)
+Yale University
 
 ## License
 
