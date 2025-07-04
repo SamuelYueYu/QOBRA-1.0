@@ -1,68 +1,116 @@
+"""
+QOBRA - Training Module
+
+This module implements the training process for the QOBRA quantum autoencoder.
+It optimizes the encoder parameters to learn meaningful representations of molecular
+sequences with functional patterns. The current implementation demonstrates on
+protein sequences but is designed for general molecular applications.
+
+The training process:
+1. Uses COBYLA optimizer to minimize the encoder loss
+2. Trains on molecular sequences with functional annotations
+3. Evaluates performance on both training and test sets
+4. Saves trained parameters and generates performance reports
+
+Key optimization: The encoder is trained to map molecular sequences to a target
+latent distribution, enabling generation of novel sequences with similar properties.
+"""
+
 from cost import *
 from scipy.optimize import minimize
 from qiskit_algorithms.optimizers import COBYLA
 
-# Main training loop for the quantum encoder
-# This optimizes the encoder parameters to minimize MMD loss between
-# encoded sequences and target Gaussian distribution
+# =============================================
+# ENCODER TRAINING PROCESS
+# =============================================
+# Train the quantum encoder to learn optimal representations of molecular sequences
 
-print("Encoder training")
+# Record training start time for performance tracking
 start = time.time()
 
-# Initialize COBYLA optimizer with maximum iterations
-# COBYLA (Constrained Optimization BY Linear Approximations) is well-suited
-# for quantum optimization problems as it handles noisy objective functions
-opt = COBYLA(maxiter=500)
+# Initialize COBYLA optimizer
+# COBYLA (Constrained Optimization BY Linear Approximation) is well-suited for
+# quantum parameter optimization as it doesn't require gradient information
+opt = COBYLA(maxiter=500)  # Maximum 500 iterations to prevent overtraining
+print("Encoder training")
 
-# Create partial function for optimization with fixed training and test data
-# This allows the optimizer to call the loss function with only parameter updates
-f = partial(e_loss, train_input=train_seqs, 
-            test_input=test_seqs)
+# Create partial function for loss computation
+# This binds the training and test data to the loss function, leaving only
+# the parameters to be optimized
+f = partial(e_loss, train_input=train_seqs, test_input=test_seqs)
 
-# Run optimization to find optimal encoder parameters
-# The optimizer will iteratively update parameters to minimize MMD loss
+# Optimize encoder parameters
+# The optimizer minimizes the loss function by adjusting encoder parameters
+# xe contains the initial parameter values (random or from previous training)
 opt_result = opt.minimize(fun=f, x0=xe)
 
-# Store optimized parameters for later use
-# These parameters represent the learned encoder that maps sequences to latent space
+# =============================================
+# SAVE TRAINED PARAMETERS
+# =============================================
+# Store the optimized encoder parameters for future use
+
+# Extract optimized parameters from the optimization result
 xe = opt_result.x
+
+# Save parameters to pickle file for persistence
+# This allows the trained model to be reused for generation or further training
 with open(f'{S}/opt-e-{S}.pkl', 'wb') as F:
     pickle.dump(xe, F)
 
 # Calculate and report training time
-elapsed_e = (time.time()-start) / 3600
+elapsed_e = (time.time() - start) / 3600  # Convert to hours
 print(f"Fit in {elapsed_e:0.2f} h")
 
-# Evaluation phase: Test the trained autoencoder on reconstruction tasks
-# This phase evaluates how well the model can reconstruct input sequences
-# after encoding them to latent space and decoding back
+# =============================================
+# PERFORMANCE EVALUATION
+# =============================================
+# Evaluate the trained encoder on training and test sets
 
+# Record evaluation start time
 start = time.time()
 
-# Initialize results files for storing reconstruction performance
+# Initialize results file
+# This file will contain performance metrics for different datasets
 file = open(f"{S}/Results-{S}.txt", "w")
-file.write("Dataset\tSize\tR\n")  # Header: Dataset, Size, Reconstruction Rate
+file.write("Dataset\tSize\tR\n")  # Header: Dataset name, size, reconstruction accuracy
 file.close()
 
-# Initialize detailed results file for individual sequence comparisons
+# =============================================
+# TRAINING SET EVALUATION
+# =============================================
+# Evaluate how well the encoder reconstructs training sequences
+
+# Initialize detailed results file
 file = open(f"{S}/R-{S}.txt", "w")
 file.write("TRAINING SET\n")
 file.close()
 
-# Evaluate reconstruction performance on training set
-# This shows how well the model has learned to reconstruct training sequences
+# Generate detailed reconstruction results for training set
+# This function compares input sequences with their reconstructions
+# and calculates similarity metrics
 output(train_seqs, head, "Train")
 
-# Evaluate reconstruction performance on test set
-# This shows the model's generalization ability on unseen sequences
+# =============================================
+# TEST SET EVALUATION
+# =============================================
+# Evaluate generalization performance on unseen test sequences
+
+# Add test set section to results file
 file = open(f"{S}/R-{S}.txt", "a")
 file.write("TEST SET\n")
 file.close()
+
+# Generate detailed reconstruction results for test set
+# This evaluates how well the model generalizes to new sequences
 output(test_seqs, head, "Test")
 
-# Calculate and report total evaluation time
-elapsed_p = (time.time()-start)/60
+# =============================================
+# FINAL PERFORMANCE REPORTING
+# =============================================
+# Calculate and report total training and evaluation time
+
+elapsed_p = (time.time() - start) / 60  # Convert to minutes
 print(f"Printed in {elapsed_p:.2f} min")
 
-# Report total experiment time (training + evaluation)
+# Report total time for the entire training process
 print(f"Finished in {elapsed_e + elapsed_p/60:.2f} h")
