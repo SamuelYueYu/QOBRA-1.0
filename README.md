@@ -1,4 +1,4 @@
-![QOBRA_logo_transparent_resized](https://github.com/user-attachments/assets/e43e3b03-9ded-432c-8750-28bffe639968)
+![20250704_1409_Cobra Logo Silhouette_remix_01jzb9xbtnf7n8wzssmn7wb1ys](https://github.com/user-attachments/assets/2ffa421c-7efd-4136-af90-5d677ae5f943)
 
 # QOBRA 1.0
 Quantum Operator-Based Real Ansatz (QOBRA) for generating protein sequences that bind to specific metal ions
