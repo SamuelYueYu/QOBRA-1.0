@@ -1,14 +1,11 @@
 <div align="center">
   <img src="assets/QOBRA_logo_gradient_resized.png" alt="QOBRA Logo" width="400">
 </div>
-
-# QOBRA 1.0
-
-**Quantum Operator-Based Real-Amplitude autoencoder**
-
-A quantum machine learning framework for de novo molecular design.
-
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/QOBRA-1.0/blob/main/src/QOBRA_demo.ipynb)
+
+# Abstract
+
+We introduce a variational quantum autoencoder tailored *de novo* molecular design named **QOBRA** (Quantum Operator-Based Real-Amplitude autoencoder). QOBRA leverages quantum circuits for real-amplitude encoding and the SWAP test to estimate reconstruction and latent-space regularization errors during back-propagation. Adjoint encoder and decoder operators enable unitary transformations and a generative process that ensures accurate reconstruction as well as novelty, uniqueness, and validity of the generated samples.  We showcase the capabilities of QOBRA as applied to *de novo* design of Ca<sup>2+</sup>-, Mg<sup>2+</sup>-, and Zn<sup>2+</sup>-binding metalloproteins after training the generative model with a modest dataset.
 
 ## Table of Contents
 1. [Overview](#overview)
