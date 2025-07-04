@@ -1,4 +1,4 @@
-![ChatGPT Image Jul 4, 2025, 12_37_07 PM](https://github.com/user-attachments/assets/b9658c18-546b-4b51-a020-d5a708ace0ad)
+![QOBRA_logo_transparent_resized](https://github.com/user-attachments/assets/e43e3b03-9ded-432c-8750-28bffe639968)
 
 # QOBRA 1.0
 Quantum Operator-Based Real Ansatz (QOBRA) for generating protein sequences that bind to specific metal ions
