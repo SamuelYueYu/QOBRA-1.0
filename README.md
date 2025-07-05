@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo2.png" alt="QOBRA Logo" width="400">
+  <img src="assets/logo.png" alt="QOBRA Logo" width="400">
 </div>
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/QOBRA-1.0/blob/main/src/QOBRA_demo.ipynb)
