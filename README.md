@@ -1,12 +1,14 @@
 <div align="center">
-  <img src="assets/logo.png" alt="QOBRA Logo" width="400">
+  <img src="assets/QOBRA_logo_gradient_resized.png" alt="QOBRA Logo" width="400">
 </div>
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/QOBRA-1.0/blob/main/src/QOBRA_demo.ipynb)
+# QOBRA 1.0
 
-# Abstract
+**Quantum Operator-Based Real-Amplitude autoencoder**
 
-We introduce a variational quantum autoencoder tailored *de novo* molecular design named **QOBRA** (Quantum Operator-Based Real-Amplitude autoencoder). QOBRA leverages quantum circuits for real-amplitude encoding and the SWAP test to estimate reconstruction and latent-space regularization errors during back-propagation. Adjoint encoder and decoder operators enable unitary transformations and a generative process that ensures accurate reconstruction as well as novelty, uniqueness, and validity of the generated samples.  We showcase the capabilities of QOBRA as applied to *de novo* design of Ca<sup>2+</sup>-, Mg<sup>2+</sup>-, and Zn<sup>2+</sup>-binding metalloproteins after training the generative model with a modest dataset.
+A quantum machine learning framework for de novo molecular design.
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/QOBRA-1.0/blob/main/src/QOBRA_demo.ipynb) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -68,18 +70,36 @@ git clone https://github.com/SamuelYueYu/QOBRA-1.0.git
 cd QOBRA-1.0
 ```
 
-2. **Create a virtual environment** (recommended)
+2. **Choose your installation method**
+
+#### Option A: Conda Environment (Recommended)
 ```bash
-python -m venv qobra_env
-source qobra_env/bin/activate  # On Windows: qobra_env\Scripts\activate
+# Create and activate conda environment
+conda env create -f environment.yml
+conda activate qobra-molecular-design
 ```
 
-3. **Install dependencies**
+The `environment.yml` file includes:
+- **Core Dependencies**: Python 3.11.5, NumPy, SciPy, Matplotlib
+- **Quantum Computing**: Qiskit ecosystem (qiskit, qiskit-algorithms, qiskit-machine-learning)
+- **Molecular Processing**: BioPython for sequence analysis
+- **Machine Learning**: PyTorch, scikit-learn
+- **Development Tools**: Jupyter Lab/Notebook, Black formatter, pytest
+- **Optional Enhancements**: RDKit (small molecules), MDAnalysis (molecular dynamics), CuPy (GPU acceleration)
+
+#### Option B: Virtual Environment with pip
 ```bash
+# Create a virtual environment
+python -m venv qobra_env
+source qobra_env/bin/activate  # On Windows: qobra_env\Scripts\activate
+
 # Install from requirements.txt
 pip install -r requirements.txt
+```
 
-# Or install manually
+#### Option C: Manual pip installation
+```bash
+# Install core dependencies manually
 pip install biopython==1.85
 pip install numpy==1.26.4
 pip install qiskit==1.4.2
@@ -314,11 +334,11 @@ Results are organized by sequence type and parameters:
 If you use QOBRA in your research, please cite:
 
 ```bibtex
-@article{yu2025qobra,
-  title={QOBRA: A Quantum Operator-Based Autoencoder for De Novo Molecular Design},
-  author={Yu, Yue and Calcagno, Francesco and Li, Haote and Batista, Victor},
+@article{yu2024qobra,
+  title={QOBRA: Quantum Operator-Based Real-Amplitude autoencoder for Molecular Design},
+  author={Yu, Yue and Calcagno, Francesco},
   journal={arXiv preprint},
-  year={2025}
+  year={2024}
 }
 ```
 
@@ -326,11 +346,11 @@ If you use QOBRA in your research, please cite:
 
 For questions, comments, or support, please contact:
 
-**Yue Yu** (samuel.yu@yale.edu)
+**Yue Yu** (samuel.yu@yale.edu)  
 Yale University
 
-**Victor S. Batista** (victor.batista@yale.edu)
-Yale University
+**Francesco Calcagno** (francesco.calcagno@unibo.it)  
+University of Bologna
 
 ## License
 
