@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/QOBRA_logo_gradient_resized.png" alt="QOBRA Logo" width="400">
+  <img src="assets/logo.png" alt="QOBRA Logo" width="250">
 </div>
 
 # QOBRA 1.0
