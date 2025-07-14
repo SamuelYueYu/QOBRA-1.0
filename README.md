@@ -2,360 +2,193 @@
   <img src="assets/logo.png" alt="QOBRA Logo" width="250">
 </div>
 
-# QOBRA 1.0
+# QOBRA-PennyLane: Quantum Optimization Benchmark Library
 
-**Quantum Operator-Based Real-Amplitude autoencoder**
+A **PennyLane-based** recreation of the Quantum Optimization Benchmark Library (QOBLIB), featuring the "Intractable Decathlon" - ten optimization problem classes designed for benchmarking quantum optimization algorithms.
 
-A quantum machine learning framework for de novo molecular design.
+## 🌟 Overview
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamuelYueYu/QOBRA-1.0/blob/main/src/QOBRA_demo.ipynb) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+This project recreates the original QOBRA-1.0/QOBLIB (originally implemented with Qiskit) using **PennyLane**, providing a comprehensive benchmarking framework for quantum optimization algorithms. The library includes challenging optimization problems that become difficult for classical methods at relatively small problem sizes, making them ideal for testing near-term quantum devices.
 
-## Table of Contents
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Project Structure](#project-structure)
-6. [Algorithm Details](#algorithm-details)
-7. [Training Data](#training-data)
-8. [Results and Visualization](#results-and-visualization)
-9. [Configuration](#configuration)
-10. [Troubleshooting](#troubleshooting)
-11. [Citation](#citation)
-12. [Contact](#contact)
-13. [License](#license)
+## 📊 The Intractable Decathlon
 
-## Overview
+The benchmark includes 10 optimization problem classes:
 
-QOBRA (Quantum Operator-Based Real-Amplitude autoencoder) is a novel quantum machine learning framework for de novo molecular design. The system uses quantum autoencoders to learn meaningful representations of molecular sequences, enabling the generation of novel molecules with desired properties.
+1. **Maximum Cut (Max-Cut)**
+2. **Quadratic Unconstrained Binary Optimization (QUBO)**
+3. **Maximum Independent Set**
+4. **Traveling Salesman Problem (TSP)**
+5. **Bin Packing**
+6. **Portfolio Optimization**
+7. **Maximum Satisfiability (Max-SAT)**
+8. **Graph Coloring**
+9. **Capacitated Vehicle Routing**
+10. **Knapsack Problem**
 
-### Key Innovation
-- **Quantum Autoencoder Architecture**: Encodes molecular sequences into quantum latent space using real-amplitude quantum circuits
-- **Flexible Training Framework**: Adaptable to various molecular types and functional patterns
-- **De Novo Generation**: Creates novel molecular designs from learned latent distributions
-- **Property Preservation**: Maintains important functional patterns and motifs
+## 🚀 Features
 
-### Current Demonstration
-- **Protein Sequences**: Example implementation using metal-binding proteins (Ca²⁺, Mg²⁺, Zn²⁺)
-- **Functional Motif Learning**: Captures and reproduces important binding sites and patterns
+- **PennyLane Implementation**: Complete recreation using PennyLane for broader quantum framework compatibility
+- **Quantum Algorithms**: QAOA, VQE, and other variational algorithms
+- **Classical Baselines**: Reference implementations for performance comparison
+- **Multiple Backends**: Support for various quantum simulators and hardware
+- **Benchmarking Tools**: Standardized metrics and evaluation frameworks
+- **Problem Generators**: Tools to create problem instances of varying difficulty
 
-### Future Applications
-- **Biomolecules**: Proteins, peptides, DNA/RNA sequences
-- **Small Molecules**: Drug compounds, chemical libraries
-- **Materials**: Polymer sequences, catalyst designs
-- **General Sequence Design**: Any domain requiring pattern-based generation
+## 🛠 Installation
 
-## Features
-
-- **Quantum Machine Learning**: Utilizes real-amplitude quantum circuits for molecular sequence encoding/decoding
-- **Flexible Molecular Types**: General framework demonstrated on metal-binding proteins, extensible to any molecular sequence domain
-- **Sequence Validation**: Comprehensive novelty, uniqueness, and validity checks
-- **Visualization Tools**: Generates visualization scripts (current example: PyMOL for proteins)
-- **Statistical Analysis**: Compares generated sequences with training data
-- **Parallel Processing**: Efficient computation using multiprocessing
-- **Comprehensive Output**: Detailed results, plots, and sequence files
-- **Domain Agnostic**: Adaptable tokenization and encoding for different molecular representations
-
-## Installation
-
-### Prerequisites
-- Python 3.11.5 or higher
-- CUDA-compatible GPU (optional, for accelerated computation)
-
-### Steps to Install
-
-1. **Clone the repository**
 ```bash
-git clone https://github.com/SamuelYueYu/QOBRA-1.0.git
-cd QOBRA-1.0
-```
+# Clone the repository
+git clone https://github.com/SamuelYueYu/QOBRA-PennyLane.git
+cd QOBRA-PennyLane
 
-2. **Choose your installation method**
-
-#### Option A: Conda Environment (Recommended)
-```bash
-# Create and activate conda environment
-conda env create -f environment.yml
-conda activate qobra-molecular-design
-```
-
-The `environment.yml` file includes:
-- **Core Dependencies**: Python 3.11.5, NumPy, SciPy, Matplotlib
-- **Quantum Computing**: Qiskit ecosystem (qiskit, qiskit-algorithms, qiskit-machine-learning)
-- **Molecular Processing**: BioPython for sequence analysis
-- **Machine Learning**: PyTorch, scikit-learn
-- **Development Tools**: Jupyter Lab/Notebook, Black formatter, pytest
-- **Optional Enhancements**: RDKit (small molecules), MDAnalysis (molecular dynamics), CuPy (GPU acceleration)
-
-#### Option B: Virtual Environment with pip
-```bash
-# Create a virtual environment
-python -m venv qobra_env
-source qobra_env/bin/activate  # On Windows: qobra_env\Scripts\activate
-
-# Install from requirements.txt
+# Install dependencies
 pip install -r requirements.txt
+
+# Install the package
+pip install -e .
 ```
 
-#### Option C: Manual pip installation
-```bash
-# Install core dependencies manually
-pip install biopython==1.85
-pip install numpy==1.26.4
-pip install qiskit==1.4.2
-pip install qiskit-algorithms==0.3.1
-pip install qiskit-machine-learning==0.8.2
-pip install scipy==1.15.2
-pip install matplotlib
-pip install torch
+## 📦 Requirements
+
+- Python 3.8+
+- PennyLane >= 0.33.0
+- NumPy
+- SciPy
+- NetworkX
+- Matplotlib
+- Optional: JAX, TensorFlow, PyTorch (for different PennyLane backends)
+
+## 🎯 Quick Start
+
+```python
+import pennylane as qml
+from qobra_pennylane import MaxCutQAOA, generate_random_graph
+
+# Generate a random Max-Cut problem
+graph = generate_random_graph(nodes=6, edge_probability=0.6)
+
+# Set up QAOA with PennyLane
+dev = qml.device('default.qubit', wires=6)
+qaoa = MaxCutQAOA(graph, device=dev, layers=2)
+
+# Run optimization
+result = qaoa.optimize(max_iterations=100)
+print(f"Best cut value: {result.best_cost}")
+print(f"Optimal parameters: {result.optimal_params}")
 ```
 
-4. **Extract training data** (if using provided datasets)
-```bash
-cd dataset
-tar -xzf Ca_bind.tar.gz
-tar -xzf Mg_bind.tar.gz
-tar -xzf Zn_bind.tar.gz
-```
-
-## Usage
-
-### Training Mode
-
-Train the quantum autoencoder on molecular sequences:
-
-```bash
-cd src
-python train.py [sequence_types] [num_qubits] [repetitions] [mode]
-```
-
-**Parameters:**
-- `sequence_types`: Space-separated sequence types (current example: `Ca Mg Zn` for metal-binding proteins)
-- `num_qubits`: Number of qubits for quantum circuits (e.g., `6`)
-- `repetitions`: Number of ansatz repetitions (e.g., `1`)
-- `mode`: `0` for training, `1` for inference
-
-**Example:**
-```bash
-# Train on calcium-binding protein sequences with 6 qubits, 1 repetition
-python train.py Ca 6 1 0
-```
-
-### Generation Mode
-
-Generate de novo molecular sequences using trained model:
-
-```bash
-# Generate sequences using trained model
-python gen.py Ca 6 1 1
-```
-
-### Batch Processing
-
-Use the provided shell scripts for convenient batch processing (example scripts for protein sequences):
-
-```bash
-# Train and generate for calcium-binding protein sequences
-bash run-Ca.sh
-
-# Train and generate for magnesium-binding protein sequences
-bash run-Mg.sh
-
-# Train and generate for zinc-binding protein sequences
-bash run-Zn.sh
-```
-
-### Jupyter Notebook Demo
-
-For interactive exploration, use the provided Jupyter notebook:
-
-```bash
-cd src
-jupyter notebook QOBRA_demo.ipynb
-```
-
-## Project Structure
+## 📁 Repository Structure
 
 ```
-QOBRA-1.0/
-├── src/                          # Source code
-│   ├── ansatz.py                 # Quantum circuit definitions
-│   ├── coding.py                 # Molecular sequence encoding/decoding
-│   ├── inputs.py                 # Data preprocessing
-│   ├── model.py                  # Quantum models
-│   ├── train.py                  # Training pipeline
-│   ├── cost.py                   # Loss functions
-│   ├── count.py                  # Token analysis
-│   ├── gen.py                    # Sequence generation
-│   ├── gen_func.py              # Generation utilities
-│   └── QOBRA_demo.ipynb         # Interactive demo
-├── dataset/                      # Example training datasets
-│   ├── Ca_bind.tar.gz           # Example: Calcium-binding proteins
-│   ├── Mg_bind.tar.gz           # Example: Magnesium-binding proteins
-│   └── Zn_bind.tar.gz           # Example: Zinc-binding proteins
-├── seq_to_struct/               # Structure prediction tools
-├── assets/                      # Images and logos
-├── run-*.sh                     # Batch processing scripts
-├── requirements.txt             # Python dependencies
-├── environment.yml              # Conda environment
-└── README.md                    # This file
+QOBRA-PennyLane/
+├── qobra_pennylane/           # Main package
+│   ├── algorithms/            # Quantum algorithms (QAOA, VQE, etc.)
+│   ├── problems/              # Problem formulations
+│   ├── benchmarks/            # Benchmarking utilities
+│   ├── classical/             # Classical baseline solvers
+│   └── utils/                 # Helper functions
+├── examples/                  # Example notebooks and scripts
+├── data/                      # Problem instances and datasets
+├── tests/                     # Unit tests
+├── docs/                      # Documentation
+├── requirements.txt           # Dependencies
+├── setup.py                   # Package setup
+└── README.md                  # This file
 ```
 
-## Algorithm Details
+## 🧮 Algorithms Implemented
 
-### Quantum Autoencoder Architecture
+### Quantum Algorithms
+- **QAOA** (Quantum Approximate Optimization Algorithm)
+- **VQE** (Variational Quantum Eigensolver)
+- **QIRO** (Quantum Iterative Routing Optimization)
+- **Quantum Annealing** simulation
 
-1. **Encoder**: Transforms molecular sequences into quantum latent representations
-   - Input feature map encodes classical sequences as quantum amplitudes
-   - Parameterized ansatz compresses information into latent space
+### Classical Algorithms
+- Simulated Annealing
+- Genetic Algorithm
+- Tabu Search
+- Gurobi/CPLEX integration
 
-2. **Decoder**: Reconstructs sequences from latent representations
-   - Inverse ansatz operation for sequence generation
-   - Latent space sampling for de novo generation
+## 📈 Benchmarking
 
-3. **Training**: Maximum Mean Discrepancy (MMD) loss minimization
-   - Matches encoded sequences to target Gaussian distribution
-   - COBYLA optimizer for quantum parameter optimization
+The library provides standardized benchmarking with:
 
-### Sequence Encoding (Current Protein Example)
+- **Performance Metrics**: Approximation ratio, time-to-solution, success probability
+- **Problem Scaling**: Automatic generation of problem instances of varying sizes
+- **Comparison Tools**: Easy comparison between quantum and classical approaches
+- **Visualization**: Built-in plotting for results analysis
 
-- **Tokens**: Domain-specific vocabulary (example: 20 amino acids for proteins)
-- **Functional Sites**: Important positions marked with '+' (e.g., binding sites, active sites)
-- **Separators**: Multiple segments separated by ':' (e.g., protein chains, molecular domains)
-- **Terminators**: Sequences ended with 'X'
+## 🎓 Examples
 
-### Extensibility to Other Molecular Domains
+Explore the `examples/` directory for comprehensive tutorials:
 
-- **Small Molecules**: SMILES strings, molecular graphs
-- **DNA/RNA**: Nucleotide sequences with structural annotations
-- **Materials**: Monomer sequences, crystal structures
-- **General**: Any tokenizable molecular representation
+- `max_cut_tutorial.ipynb` - Introduction to Max-Cut with QAOA
+- `portfolio_optimization.ipynb` - Financial portfolio optimization
+- `tsp_comparison.ipynb` - Comparing quantum vs classical TSP solvers
+- `benchmarking_guide.ipynb` - Complete benchmarking workflow
 
-### Validation Criteria
+## 📊 Performance Tracking
 
-Generated sequences are validated for:
-- **Novelty**: Not present in training data
-- **Uniqueness**: No duplicates in generated set
-- **Validity**: Biologically plausible functional patterns
-- **Chain Length**: Minimum length requirements met
+All benchmark results can be submitted to track progress in quantum optimization:
 
-## Example Training Data
+```python
+from qobra_pennylane.benchmarks import BenchmarkRunner
 
-The current demonstration uses curated protein datasets to showcase the framework's capabilities. The provided example datasets contain metal-binding proteins:
-
-- **Calcium (Ca²⁺)**: ~12,800 sequences
-- **Magnesium (Mg²⁺)**: ~16,500 sequences  
-- **Zinc (Zn²⁺)**: ~19,500 sequences
-
-Each sequence includes:
-- Molecular identifier (e.g., PDB code for proteins)
-- Sequence representation (amino acid sequence in this example)
-- Functional annotations (binding sites, active sites, etc.)
-- Structural organization (chain information, domains)
-
-### Data Format Flexibility
-
-The framework is designed to accommodate various molecular sequence formats:
-- **Biomolecules**: FASTA sequences, structural annotations
-- **Small Molecules**: SMILES, InChI, molecular fingerprints
-- **Materials**: Compositional sequences, structural descriptors
-- **Custom**: Any tokenizable molecular representation
-
-## Results and Visualization
-
-### Output Files
-
-Training and generation produce comprehensive results:
-
-- **Sequence Files**: Generated sequences in text format
-- **PyMOL Scripts**: 3D visualization commands
-- **Statistical Plots**: Distribution comparisons
-- **Performance Metrics**: Novelty, uniqueness, validity scores
-- **Training Curves**: Loss evolution during optimization
-
-### Visualizations
-
-- **Token Frequencies**: Amino acid distribution analysis
-- **Functional Site Patterns**: Analysis of important motifs and sites
-- **Sequence Length Distribution**: Length statistics
-- **3D Structures**: PyMOL-based structure visualization
-
-## Configuration
-
-### Command Line Parameters
-
-All parameters are passed via command line arguments:
-
-```bash
-python script.py [sequence_types] [num_qubits] [repetitions] [mode]
+runner = BenchmarkRunner()
+results = runner.run_benchmark("max_cut", problem_sizes=[4, 6, 8, 10])
+runner.save_results("my_benchmark_results.json")
 ```
 
-### Key Variables
+## 🤝 Contributing
 
-- `dim_tot`: Total quantum state dimension (2^num_qubits)
-- `max_len`: Maximum sequence length
-- `cap`: Maximum training sequences (6000)
-- `processes`: Number of parallel processes (6)
-- `threshold`: Minimum chain length (4)
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
 
-### Output Directories
+- Adding new problem formulations
+- Implementing additional quantum algorithms
+- Submitting benchmark results
+- Improving documentation
 
-Results are organized by sequence type and parameters:
-```
-{sequence_type}-{repetitions}/
-├── Results-{sequence_type}-{repetitions}.txt
-├── R-{sequence_type}-{repetitions}.txt
-├── tokens-{sequence_type}.png
-└── {seed}/
-    ├── Bar-{seed}-{sequence_type}-{repetitions}.png
-    └── Samples/
-        └── {index}/
-            ├── {index}.txt
-            └── {index}.pml
-```
+## 📜 Citation
 
-## Troubleshooting
-
-### Common Issues
-
-1. **Memory Errors**: Reduce `cap` or `processes` values
-2. **Slow Training**: Increase `processes` for parallel computation
-3. **Poor Generation Quality**: Adjust `threshold` or training parameters
-4. **Visualization Issues**: Ensure PyMOL is installed for 3D viewing
-
-### Error Messages
-
-- `FileNotFoundError`: Check data paths and extracted datasets
-- `ParameterError`: Verify command line argument format
-- `MemoryError`: Reduce batch size or quantum circuit dimensions
-
-## Citation
-
-If you use QOBRA in your research, please cite:
+If you use QOBRA-PennyLane in your research, please cite:
 
 ```bibtex
-@article{yu2024qobra,
-  title={QOBRA: Quantum Operator-Based Real-Amplitude autoencoder for Molecular Design},
-  author={Yu, Yue and Calcagno, Francesco},
-  journal={arXiv preprint},
+@software{qobra_pennylane,
+  title={QOBRA-PennyLane: Quantum Optimization Benchmark Library with PennyLane},
+  author={Samuel Yu},
+  year={2025},
+  url={https://github.com/SamuelYueYu/QOBRA-PennyLane}
+}
+```
+
+Original QOBLIB paper:
+```bibtex
+@article{qoblib2024,
+  title={Quantum Optimization Benchmark Library -- The Intractable Decathlon},
+  author={Koch, Thorsten and others},
+  journal={arXiv preprint arXiv:2504.03832},
   year={2024}
 }
 ```
 
-## Contact
+## 🔗 Related Projects
 
-For questions, comments, or support, please contact:
+- [Original QOBLIB](https://git.zib.de/qopt/qoblib-quantum-optimization-benchmarking-library) - The original Qiskit-based implementation
+- [PennyLane](https://pennylane.ai/) - The quantum computing framework used in this project
+- [Qiskit Optimization](https://qiskit.org/ecosystem/optimization/) - IBM's quantum optimization library
 
-**Yue Yu** (samuel.yu@yale.edu)  
-Yale University
+## 📄 License
 
-**Francesco Calcagno** (francesco.calcagno@unibo.it)  
-University of Bologna
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-## License
+## 🙏 Acknowledgments
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+- Original QOBLIB team for the foundational work
+- PennyLane team for the excellent quantum computing framework
+- Quantum Optimization Working Group for problem formulations
+- Contributors and the quantum computing community
 
 ---
 
-**Note**: This is research software. While we strive for accuracy and reliability, please validate all generated sequences experimentally before use in critical applications.
+**Ready to benchmark quantum optimization? Let's push the boundaries of what's possible with near-term quantum devices! 🚀**
